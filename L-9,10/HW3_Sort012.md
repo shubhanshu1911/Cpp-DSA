@@ -1,0 +1,2 @@
+The question is sorted the given array [0|1|0|1|1|2|0|2|2] ki pure zero ek taraf or pure 1 ek taraf ho or pure 2 ek taraf i.e [0|0|0|1|1|1|2|2|2]
+**link for the question and solution is : [https://bit.ly/3DfQW0s]**
