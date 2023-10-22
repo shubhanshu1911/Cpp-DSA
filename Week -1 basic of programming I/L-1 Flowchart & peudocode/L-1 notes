@@ -1,0 +1,17 @@
+# Thought process to sove a problem 
+1. Understand the problem
+2. inout values
+3. Approach
+    Problem --> solution(head) --> Rough solution(Flowcharts/pseudo code) --> source code(high level language) --> machine understandable language(complier)
+# Algorithm : Series of steps to solve of a problem 
+# Flowcharts : Graphical repesentation of an algo
+`Components` :
+> *Terminator block* : Starting and ending state of algo. Represtent by over shape.
+> *Input/Output block* : It is used to read and print an input and output. Represented by parallogram block
+> *Process block* : Calculation and initialion can be done here. Represented by rectangle.
+> *Decision making block* : We give some condition inside this and it has two branches either yes or no. Respresented by Rhombus
+> *Connector* : this represent a function. Represented by circle  
+# Pseudo code : Generic way to represent an algo in Textual form
+ 
+
+
