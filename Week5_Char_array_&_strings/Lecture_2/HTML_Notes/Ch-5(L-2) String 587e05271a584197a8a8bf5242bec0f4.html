@@ -1,0 +1,796 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Ch-5(L-2) : String </title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="587e0527-1a58-4197-a8a8-bf5242bec0f4" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🔤</span></div><h1 class="page-title">Ch-5(L-2) : String </h1><p class="page-description"></p></header><div class="page-body"><h1 id="a69c459b-39ef-4614-b455-faf297cf0df1" class="">Classwork Questions </h1><ul id="327701e4-4f1a-4f17-86e6-03753ba1dfda" class="toggle"><li><details open=""><summary><a href="https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string/"><strong>Remove all adjacent duplicates in string</strong></a><strong> </strong></summary><h3 id="17507686-a7fd-4f22-a958-b76104837543" class="">Question :</h3><figure id="ef06723a-8510-4216-93ac-4a694ea1fb66" class="image"><a href="Ch-5(L-2)%20String%20587e05271a584197a8a8bf5242bec0f4/Untitled.jpeg"><img style="width:1600px" src="Ch-5(L-2)%20String%20587e05271a584197a8a8bf5242bec0f4/Untitled.jpeg"/></a></figure><h3 id="e52d47c8-4364-4e78-86e5-f40af9987060" class="">Logic :</h3><ol type="1" id="79b0afcb-d619-4cff-9871-e57fb3e2a02b" class="numbered-list" start="1"><li>phele empty string banao called <code>ans</code></li></ol><ol type="1" id="15e8bbee-4c83-4e04-947c-6664af445d61" class="numbered-list" start="2"><li>agr ans ka last char , string ke current char ke equal h to pop out krdo i.e <code>ans[ans.length()-1] == s[i]</code> → <code>pop_back()</code></li></ol><ol type="1" id="ce26d2a3-c8cf-4eea-a0f9-0b76d3b36ffe" class="numbered-list" start="3"><li>nhi to push_back krna </li></ol><h3 id="df7ebcef-1b11-4361-8270-9f914d95f0b0" class="">Code : </h3><pre id="9d24eb9c-e3be-4f77-ac43-712984f9caa0" class="code"><code>class Solution {
+public:
+    string removeDuplicates(string s) {
+       string ans = &quot;&quot;;
+       int i =0;
+       while(i &lt; s.length()){
+            // string is not empty 
+           if(ans.length() &gt; 0){
+               if(ans[ans.length()-1] == s[i]){
+                   ans.pop_back();
+               }
+               else{
+                   ans.push_back(s[i]);
+               }
+           }
+            // string is empty
+           else{
+               ans.push_back(s[i]);
+           }
+           i++;
+       }
+       return ans; 
+    }
+};</code></pre></details></li></ul><ul id="6ddf5cfb-b8dd-4df1-9165-d04df76d0f4c" class="toggle"><li><details open=""><summary><a href="https://leetcode.com/problems/remove-all-occurrences-of-a-substring/"><strong>Remove all the Occurrences of a Sub - String</strong></a><strong> </strong></summary><h3 id="bb33e0e1-df80-4525-920e-d1ff5f589b09" class="">Question :</h3><figure id="3a96b59d-362b-444a-8a96-7d5a1e1feefd" class="image"><a href="Ch-5(L-2)%20String%20587e05271a584197a8a8bf5242bec0f4/Untitled%201.jpeg"><img style="width:1600px" src="Ch-5(L-2)%20String%20587e05271a584197a8a8bf5242bec0f4/Untitled%201.jpeg"/></a></figure><h3 id="e9794eb3-4868-4a8c-b345-660b62fd16e3" class="">Logic : </h3><ol type="1" id="a67e4fb7-efe0-47b7-bacb-e8281e8a531c" class="numbered-list" start="1"><li><code>Find</code> can be used to find the sub-string </li></ol><ol type="1" id="dc2da4bd-fc18-44c1-b95c-ca22caf98e97" class="numbered-list" start="2"><li><code>erase</code> it can be used to remove element </li></ol><h3 id="8d053f88-321e-4ec1-9d30-4bcef3bd3f1f" class="">Code : </h3><pre id="fcc51d9f-81a5-483c-9263-b11293beda61" class="code"><code>class Solution {
+public:
+    string removeOccurrences(string s, string part) {
+        int pos = s.find(part);
+        while(pos != string::npos){
+            s.erase(pos,part.length());
+            pos = s.find(part);
+        }
+        return s;
+    }
+};</code></pre></details></li></ul><ul id="db7eb643-dc15-4a78-8518-8c7ae2350086" class="toggle"><li><details open=""><summary><a href="https://leetcode.com/problems/valid-palindrome-ii/"><strong>Valid Palindrome II</strong></a></summary><h3 id="878c70ae-289e-48c8-979c-8e5d52881c66" class="">Question :</h3><figure id="d24769ce-2c0e-4075-9736-2636178113c9" class="image"><a href="Ch-5(L-2)%20String%20587e05271a584197a8a8bf5242bec0f4/Untitled%202.jpeg"><img style="width:1600px" src="Ch-5(L-2)%20String%20587e05271a584197a8a8bf5242bec0f4/Untitled%202.jpeg"/></a></figure><h3 id="65f6fad5-ed13-45dd-bc4e-7e1c7b5e3cc0" class="">Logic : </h3><ol type="1" id="47fbc981-8257-4dd6-9e29-58074d51a933" class="numbered-list" start="1"><li><code>s[i] == s[j]</code> → no need to remove, i++, j - -</li></ol><ol type="1" id="385ff5ca-9adc-43b5-8a0e-7237a1769e9c" class="numbered-list" start="2"><li><code>s[i] != s[j]</code> <ol type="a" id="1d5205a3-a7ba-498d-9f42-67ecd020140e" class="numbered-list" start="1"><li>i remove krdo then i+1 → j tak palindrome check krruga </li></ol><ol type="a" id="0669f893-4f1d-4274-bb24-f3d64df1765f" class="numbered-list" start="2"><li>j remove krdo then i → j-1 tak palindrome check krruga </li></ol></li></ol><h3 id="2b881b01-f788-49f9-9a1e-647bc89a2db6" class="">Code :</h3><pre id="702102db-1d07-45e6-976d-cda16f0e88d8" class="code"><code>class Solution {
+public:
+    bool checkPalindrome(string s,int i, int j){
+        while (i &lt;= j){
+            if(s[i] != s[j]){
+                return false;
+            }
+            i++;
+            j--;
+        }
+        return true;
+    }
+    bool validPalindrome(string s) {
+        int i = 0;
+        int j = s.length()-1;
+        while(i &lt;= j){
+            if(s[i] != s[j]){
+                // ya to i ko remove krdo ya fir j ko remove krdo 
+                return checkPalindrome(s, i+1, j) || checkPalindrome(s, i,j-1);
+            }
+            else{
+                // s[i] == s[j]
+                i++;
+                j--;
+            }
+        }
+        return true;
+    }
+};</code></pre></details></li></ul><ul id="0e663544-b5e6-44e3-ab53-39f214297ba6" class="toggle"><li><details open=""><summary><a href="https://leetcode.com/problems/minimum-time-difference/"><strong>Minimum Time Difference</strong></a><strong> </strong></summary><h3 id="d8873cab-3d2e-40b6-a497-87e47072b5d1" class="">Question : </h3><figure id="399c5647-3616-4141-88d3-9e7119509a33" class="image"><a href="Ch-5(L-2)%20String%20587e05271a584197a8a8bf5242bec0f4/Untitled%203.jpeg"><img style="width:1600px" src="Ch-5(L-2)%20String%20587e05271a584197a8a8bf5242bec0f4/Untitled%203.jpeg"/></a></figure><h3 id="b321901f-367e-4ed4-8f5b-fb4667f34509" class="">Logic : </h3><figure id="0f48d3f1-d28d-4d74-b8d8-e793a0bedafa" class="image"><a href="Ch-5(L-2)%20String%20587e05271a584197a8a8bf5242bec0f4/Untitled%204.jpeg"><img style="width:1600px" src="Ch-5(L-2)%20String%20587e05271a584197a8a8bf5242bec0f4/Untitled%204.jpeg"/></a></figure><ol type="1" id="83f97742-5e92-4292-a8d4-a67ba80e055e" class="numbered-list" start="1"><li>Convert all the time (HH:MM) <code>[string]</code> into minutes <code>[int]</code> using <code>stoi()</code> → string to int function </li></ol><ol type="1" id="8470dd6f-b86e-4d66-b42e-28d6fa1f7bf2" class="numbered-list" start="2"><li>sort the minutes array then find all the difference between the adjacent elements </li></ol><ol type="1" id="2645c744-ea15-4a1c-aaf2-f6fd6ac1e114" class="numbered-list" start="3"><li>find the minimum difference among </li></ol><h3 id="26cbdd1e-0afd-49d0-833b-5aca58b1bc20" class="">Code :</h3><pre id="7efc3e55-939f-4c06-93e3-e5e1f50381f7" class="code"><code>class Solution {
+public:
+    int findMinDifference(vector&lt;string&gt;&amp; timePoints) {
+        // step 1 : converting into minutes
+        vector &lt;int&gt; minutes;
+
+        for(int i=0; i&lt;timePoints.size(); i++){
+            string curr = timePoints[i];
+
+            int hr = stoi( curr.substr(0,2) );
+            int min = stoi ( curr.substr(3,2) );
+            int totalMin = hr * 60 + min;
+            minutes.push_back(totalMin);
+        }
+
+        // step 2 : sort 
+        sort(minutes.begin(),minutes.end());
+
+        // step 3 : difference and calculate minimum difference 
+        int mini = INT_MAX;
+        int n =minutes.size();
+        for(int i=0; i&lt;n-1; i++){
+            int diff = minutes[i+1] - minutes[i];
+            mini = min(diff,mini);
+        }
+
+        // time circular hota h, last difference bi dekhna padega - THIS IS THE GAME
+	      int lastDiff1 = (minutes[0] + 1440) - minutes[n-1];
+        int lastDiff2 =  minutes[n-1] - minutes[0];
+        int lastDiff = min(lastDiff1,lastDiff2);
+        mini = min(mini,lastDiff);
+        return mini;
+    }
+};</code></pre><p id="86f9a36f-7ceb-490c-9a0c-0ffa4a2698b8" class="">
+</p></details></li></ul><ul id="bd668417-b2a7-4ce1-b9c8-8bdc01dd0eae" class="block-color-default toggle"><li><details open=""><summary><a href="https://leetcode.com/problems/palindromic-substrings/"><mark class="highlight-yellow_background"><strong>Palindromic Substrings</strong></mark></a><mark class="highlight-yellow_background"><strong> </strong></mark></summary><h3 id="8a8efec2-e4eb-4975-aa33-f53f95f43ebf" class="">Question : </h3><figure id="3706a3db-74fd-41a7-8ed8-5425a7fe8338" class="image"><a href="Ch-5(L-2)%20String%20587e05271a584197a8a8bf5242bec0f4/Untitled%205.jpeg"><img style="width:1600px" src="Ch-5(L-2)%20String%20587e05271a584197a8a8bf5242bec0f4/Untitled%205.jpeg"/></a></figure><h3 id="9d1a59b3-16b1-419a-9195-42a61d3beed1" class="">logic : </h3><p id="ba88a747-679a-481a-9446-0247cfecee6b" class="">Method -1 : <div class="indented"><figure class="callout" style="white-space:pre-wrap;display:flex" id="650897c8-fc91-4c52-ae25-1a126dbc29a1"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">TC is O(<style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>n</mi><mn>3</mn></msup></mrow><annotation encoding="application/x-tex">n^3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span>)</div></figure><ol type="1" id="04b04b21-51da-46d7-b303-9402efb1ab2b" class="numbered-list" start="1"><li>find all the substring </li></ol><ol type="1" id="8c9f2318-1217-4e7e-a76f-5e94b86610a6" class="numbered-list" start="2"><li>check for palindrome and count </li></ol></div></p><p id="c9d72b5b-46e7-435e-8c11-098df18b444d" class="">Method - 2 :<div class="indented"><figure class="callout" style="white-space:pre-wrap;display:flex" id="4abf37f8-a29b-4779-b1b1-150c27665bf7"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">TC is O(<style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>n</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">n^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span>)</div></figure><ul id="b9f6fe1e-0ccb-4ec6-8984-e0ee042d4844" class="toggle"><li><details open=""><summary>When<mark class="highlight-yellow"> i and j ko same position</mark> par rakhte ho to aap<mark class="highlight-yellow"> odd length</mark> ki sub-string nikal pate ho</summary><figure id="1d87f313-17d8-4cde-a603-6bab23809267" class="image"><a href="Ch-5(L-2)%20String%20587e05271a584197a8a8bf5242bec0f4/Untitled%206.jpeg"><img style="width:1600px" src="Ch-5(L-2)%20String%20587e05271a584197a8a8bf5242bec0f4/Untitled%206.jpeg"/></a></figure></details></li></ul><ul id="88e8ef47-2afa-4621-80af-f700bf5d7b9c" class="toggle"><li><details open=""><summary>When<mark class="highlight-yellow"> i and j ko adjacent position</mark> par rakhte ho to aap <mark class="highlight-yellow">even length</mark> ki sub-string nikal pate ho</summary><figure id="2aaa51e1-fd13-4dcf-8a58-928c1b71488b" class="image"><a href="Ch-5(L-2)%20String%20587e05271a584197a8a8bf5242bec0f4/Untitled%207.jpeg"><img style="width:1062px" src="Ch-5(L-2)%20String%20587e05271a584197a8a8bf5242bec0f4/Untitled%207.jpeg"/></a></figure></details></li></ul><h3 id="8f2719ee-7664-4559-a8bd-394bb8753ae7" class="">Code :</h3><pre id="a596e00b-ca74-498a-92b4-5c043b49d144" class="code"><code>class Solution {
+public:
+    int expandAroundIndex(string s,int left, int right){
+        int count =0;
+        while(left&gt;=0 &amp;&amp; right&lt;s.length() &amp;&amp; s[left]==s[right]){
+            count ++;
+            left--;
+            right++;
+        }
+        return count;
+    }
+    int countSubstrings(string s) {
+        int totalCount = 0;
+        for(int centre=0; centre&lt;s.length(); centre++){
+            // odd
+            int oddAns = expandAroundIndex(s,centre,centre);
+            totalCount = totalCount + oddAns;
+            // even
+            int EvenAns = expandAroundIndex(s,centre,centre+1);
+            totalCount = totalCount + EvenAns;
+        }
+        return totalCount;
+    }
+};</code></pre></div></p></details></li></ul><p id="e6d9fb01-09ea-4c05-9cac-3a17269a62c5" class="">
+</p><hr id="0c50a897-a552-4142-84e1-110bfc544e6b"/><h1 id="4c0d27db-8c7a-4b5c-b489-63716c6ec37e" class="">Homework Question :</h1><ul id="9980dda5-33e9-4860-aed8-8f78476a9ceb" class="toggle"><li><details open=""><summary>Write the logic of erase and find function </summary></details></li></ul><p id="e288db90-caa8-4874-a2a5-29fb6f3ac26a" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

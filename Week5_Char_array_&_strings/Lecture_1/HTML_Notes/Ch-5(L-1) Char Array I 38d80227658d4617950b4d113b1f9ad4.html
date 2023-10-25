@@ -1,0 +1,831 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Ch-5(L-1) : Char Array I </title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="38d80227-658d-4617-950b-4d113b1f9ad4" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🔡</span></div><h1 class="page-title">Ch-5(L-1) : Char Array I </h1><p class="page-description"></p></header><div class="page-body"><h1 id="652fecd5-ecf7-429f-91fa-e6fb50d39a97" class="">Char Array </h1><ul id="e9a8d721-b66d-4fca-b396-59825ee2054c" class="bulleted-list"><li style="list-style-type:disc">Array is a data structure into which you can store data </li></ul><ul id="3e3a26a6-9b8e-44d0-bb09-cd0ea8290de2" class="bulleted-list"><li style="list-style-type:disc">Char is a datatype which explain which type of data can be stored in data structure </li></ul><ul id="a17b1b74-e2de-4ded-8a79-f7cce74c4249" class="bulleted-list"><li style="list-style-type:disc">Input of Char array can be taken by either single element( <code>cin &gt;&gt; ch[i]</code>) or directly whole string(<code>cin &gt;&gt; ch</code>) </li></ul><ul id="5f5f628a-c570-4e41-a9c6-e18f2dc1bafe" class="toggle"><li><details open=""><summary>Whenever you take input of string through cin, by default at the last null character comes (”\0”) which shows termination of string </summary><div id="81677602-158e-437a-98cf-1005b457be86" class="column-list"><div id="dc7865b9-a71a-4d05-b043-217ec8544a97" style="width:50%" class="column"><table id="fe98eada-03c0-44ee-8656-5ebaae3c24c3" class="simple-table"><tbody><tr id="3b00b65e-5362-4f26-81e6-513d863d6920"><td id="mW~K" class="" style="width:47.32500457763672px">I</td><td id="qt`@" class="" style="width:42.32500076293945px">S</td><td id="sfTk" class="" style="width:45.32500076293945px">H</td><td id="bn{c" class="" style="width:54.32500457763672px">A</td><td id="Eefr" class="" style="width:57.32500457763672px">N</td><td id="}f\G" class="" style="width:50.32500457763672px">\0</td></tr></tbody></table></div><div id="2d881945-cbf9-456e-af21-d8218d20bab4" style="width:50%" class="column"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="66f01a64-5e8e-461d-bf7e-0f5ce3d51378"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Null character is a terminator for string </div></figure></div></div></details></li></ul><ul id="167dc5ea-10f7-42e6-b3be-00e16b066901" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow">Cin only reads till space, enter, tab</mark> i.e if you have enter your full name with space/enter/tab it will only read the first name </li></ul><ul id="7e8a9462-ac97-48db-93a7-d0e8639f8019" class="bulleted-list"><li style="list-style-type:disc">So for reading spaces we can use <code>cin.getline(arr,max input,delimeter)</code> </li></ul><h1 id="0d0fa036-3c2f-4bc6-840f-312154c0fe86" class="">Classwork Questions</h1><ul id="cc86b214-6191-4838-b7f9-107ae65c6de6" class="toggle"><li><details open=""><summary>Length of array</summary><ul id="a5343cc3-be90-4247-8edc-654fb8e3d095" class="toggle"><li><details open=""><summary>Question </summary><figure id="f50da004-a72e-4e59-add3-9f72d500dc1e" class="image"><a href="Ch-5(L-1)%20Char%20Array%20I%2038d80227658d4617950b4d113b1f9ad4/Untitled.jpeg"><img style="width:1382px" src="Ch-5(L-1)%20Char%20Array%20I%2038d80227658d4617950b4d113b1f9ad4/Untitled.jpeg"/></a></figure></details></li></ul><ul id="e270e165-27ef-4615-a2fa-b155ed6d83af" class="toggle"><li><details open=""><summary>Logic </summary><ul id="620af4f6-3f20-4d86-870e-c8a30c3619c6" class="bulleted-list"><li style="list-style-type:disc">linear search of character krna h or jesehi humko null character milga hum ruk jayenge </li></ul><ul id="8bd813e4-9f6e-42f2-a299-9d10270e2633" class="bulleted-list"><li style="list-style-type:disc">We can also use <code>strlen(arr)</code> function to find the length </li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="289c9fbe-cdc6-4772-b69a-837a8cb8d660"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">We can use various functions for character arrays like 
+strlen → length, 
+strcmp → comparison , 
+strcpy → copy </div></figure></details></li></ul><ul id="9ceca5ac-3401-44dd-a023-11a93a16682a" class="toggle"><li><details open=""><summary>Code</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="e14b5524-51b9-4bc8-b314-0ae9176e0e54"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Time Complexity : O(n) and space complexity O(1)</div></figure><pre id="16304578-e91e-4ccc-bc3b-88dcb73289c7" class="code"><code>#include&lt;iostream&gt;
+using namespace std;
+#include&lt;string.h&gt;
+
+int getLength(char name[]){
+    int length = 0;
+    int i=0;
+    while(name[i] != &#x27;\0&#x27;){
+        length++;
+        i++;
+    }
+    return length;
+}
+int main (){
+    char name[100];
+
+    cin&gt;&gt;name;
+
+    cout&lt;&lt;&quot;length is :&quot; &lt;&lt; getLength(name)&lt;&lt;endl;
+
+
+    // Predefin function to get length of the string
+    cout &lt;&lt; &quot;length is -&gt;&quot; &lt;&lt; strlen(name)&lt;&lt;endl;
+   
+
+}</code></pre></details></li></ul></details></li></ul><ul id="ac8c4af0-0e2d-46ca-bcaf-e9877cfadcb4" class="toggle"><li><details open=""><summary>Reverse a string </summary><ul id="fde7714a-3a39-41b8-a49e-88556f1d3232" class="toggle"><li><details open=""><summary>Question </summary><figure id="fda46ed6-0927-4e4e-ba2a-c49487a886d3" class="image"><a href="Ch-5(L-1)%20Char%20Array%20I%2038d80227658d4617950b4d113b1f9ad4/Untitled%201.jpeg"><img style="width:1600px" src="Ch-5(L-1)%20Char%20Array%20I%2038d80227658d4617950b4d113b1f9ad4/Untitled%201.jpeg"/></a></figure></details></li></ul><ul id="004552c5-79f8-443f-948d-6b0230996e3d" class="toggle"><li><details open=""><summary>Logic </summary><figure id="948d7288-3f4a-48ed-a08a-b09ee0802259" class="image"><a href="Ch-5(L-1)%20Char%20Array%20I%2038d80227658d4617950b4d113b1f9ad4/Untitled.png"><img style="width:670px" src="Ch-5(L-1)%20Char%20Array%20I%2038d80227658d4617950b4d113b1f9ad4/Untitled.png"/></a></figure><ol type="1" id="9427ba97-e466-4a5a-a191-2a98868cc28f" class="numbered-list" start="1"><li>We can solve this using 2 pointer approach and by swapping the two pointers </li></ol><ol type="1" id="5c513c55-8d95-4c94-8007-edaade3349fe" class="numbered-list" start="2"><li>We will swap all the elements</li></ol><ol type="1" id="e6e67c3c-9ce4-4d99-a096-dbbb92c8d0fa" class="numbered-list" start="3"><li>we need to stop when i &gt; j </li></ol></details></li></ul><ul id="3d6dfcc1-392d-4e44-9534-74fa7aceaf78" class="toggle"><li><details open=""><summary>Code</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="73610c13-32e9-4bb3-be7e-c5a4e3f6b648"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Time Complexity : O(n) and space complexity : O(1)</div></figure><pre id="940780e5-6f2e-4b7c-9da8-125f4a7db18e" class="code"><code>#include&lt;iostream&gt;
+#include&lt;string.h&gt;
+using namespace std;
+
+void reveserstring(char name[]){
+    int i=0;
+    int n=strlen(name);
+    int j=n-1;
+    while(i&lt;=j){
+        swap(name[i],name[j]);
+        i++;
+        j--;
+    }
+
+}
+int main(){
+    char name[100];
+
+    cin&gt;&gt;name;
+
+    cout &lt;&lt; &quot;intilally : &quot; &lt;&lt; name &lt;&lt;endl;
+
+    reveserstring(name);
+    
+    cout&lt;&lt;&quot;finally : &quot; &lt;&lt; name &lt;&lt;endl;
+}</code></pre><p id="9c5a3275-8547-4738-bada-656f18bb7f00" class="">
+</p></details></li></ul></details></li></ul><ul id="cc01afb0-43ad-4839-9052-a53e61fbb241" class="toggle"><li><details open=""><summary>Replace all the spaces </summary><ul id="2e627974-210e-4ebe-8ee1-b96d58f8acfe" class="toggle"><li><details open=""><summary>Question</summary><figure id="6a3388bc-058b-4475-8697-a6f442390978" class="image"><a href="Ch-5(L-1)%20Char%20Array%20I%2038d80227658d4617950b4d113b1f9ad4/Untitled%202.jpeg"><img style="width:1600px" src="Ch-5(L-1)%20Char%20Array%20I%2038d80227658d4617950b4d113b1f9ad4/Untitled%202.jpeg"/></a></figure></details></li></ul><ul id="d63b50c5-87a2-4c45-b2ac-030c64e3934d" class="toggle"><li><details open=""><summary>Logic </summary><ul id="345cbcd4-da5f-489b-b1c2-5201a034f423" class="bulleted-list"><li style="list-style-type:disc">pure string ko traverse krrege or jaha space likhega waha space ko @ se replace kr denge </li></ul></details></li></ul><ul id="e4853a68-5965-47b4-bb32-e0a8fcb63170" class="toggle"><li><details open=""><summary>code</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="36b1b46e-7406-40f9-bbfb-033d6f7f2a7d"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Time Complexity : O(n) and space complexity : O(1)</div></figure><pre id="a22a00c1-82df-45b2-bd70-9fa6d19cbee1" class="code"><code>#include&lt;iostream&gt;
+using namespace std;
+#include&lt;string.h&gt;
+
+void replaceSpaces(char sent[]){
+    int i =0;
+    int n=strlen(sent);
+    for(int i=0;i&lt;n;i++){
+        if(sent[i] == &#x27; &#x27;){
+            sent[i] = &#x27;@&#x27;;
+        }
+    }
+}
+int main(){
+    char sent[100];
+
+    cin.getline(sent,50);
+
+
+    replaceSpaces(sent);
+    
+    cout&lt;&lt;&quot;finally : &quot; &lt;&lt; sent &lt;&lt;endl;
+}</code></pre><p id="b143c810-3652-44d1-aedc-904e14af08d6" class="">
+</p></details></li></ul></details></li></ul><ul id="e4266488-d5c3-437e-80da-424917f67631" class="toggle"><li><details open=""><summary>Palindrome problem</summary><ul id="06a9836f-3b80-4b9e-9f90-cf63ca237189" class="toggle"><li><details open=""><summary>Question </summary><figure id="e6f0c99f-6e38-4157-b5bd-7fd6f0b255be" class="image"><a href="Ch-5(L-1)%20Char%20Array%20I%2038d80227658d4617950b4d113b1f9ad4/Untitled%203.jpeg"><img style="width:1600px" src="Ch-5(L-1)%20Char%20Array%20I%2038d80227658d4617950b4d113b1f9ad4/Untitled%203.jpeg"/></a></figure></details></li></ul><ul id="1039edbc-aa8a-4f01-84c1-7759a9c74b90" class="toggle"><li><details open=""><summary>logic </summary><ol type="1" id="db867970-5986-4379-a51a-1af26d882dd0" class="numbered-list" start="1"><li>Method -1 : phele normal string ko reverse krro and then dono ko compare krlo but it has TC : O<style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span> and SC : O<style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span> </li></ol><ol type="1" id="41258b72-6ef0-4959-96bf-c2132564a7dc" class="numbered-list" start="2"><li>Method 2 : by 2 pointer approach, First letter ko last letter se compare krna h </li></ol></details></li></ul><ul id="e170b803-f9c5-496d-8622-44c92cfdc111" class="toggle"><li><details open=""><summary>code</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="e6218c2f-d86e-4657-b62f-97c98d7c8dbb"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Time Complexity : O(n) and space complexity : O(1)</div></figure><pre id="7f32dd09-ddf7-4730-a308-c9591534470a" class="code code-wrap"><code>bool Palindrome(char word[]){
+int i=0;
+int n = strlen(word)
+int j=n-1;
+
+while(i&lt;=j)
+{
+	if(word[i] != word[j]){
+		return false;	
+	}
+	else{
+		i++;
+		j--;
+	}
+}
+return true;
+}</code></pre></details></li></ul></details></li></ul><ul id="f63763dd-97ee-4951-9139-9ba6b517ca3b" class="toggle"><li><details open=""><summary>Lower case to upper case letters </summary><ul id="dcd6710f-1cad-4286-8a78-5ce0048aab81" class="toggle"><li><details open=""><summary>Question </summary><figure id="f98befc0-91a3-4992-a3bd-e2e3f3235155" class="image"><a href="Ch-5(L-1)%20Char%20Array%20I%2038d80227658d4617950b4d113b1f9ad4/Untitled%204.jpeg"><img style="width:1600px" src="Ch-5(L-1)%20Char%20Array%20I%2038d80227658d4617950b4d113b1f9ad4/Untitled%204.jpeg"/></a></figure></details></li></ul><ul id="68e31bed-0836-499c-bf50-282ac20b6f4e" class="toggle"><li><details open=""><summary>Logic </summary><ol type="1" id="ae15830a-4c35-4cae-a219-d84a7e3e37b1" class="numbered-list" start="1"><li>Convert lower case into upper case → <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mi>C</mi><mo>−</mo><mi>a</mi><mo>+</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">LC - a + A</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="mord mathnormal">L</span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathnormal">a</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal">A</span></span></span></span></span><span>﻿</span></span>. 
+Example : c-a+A = C (99-97+65 = 67).</li></ol><ol type="1" id="0b9fc232-dc1c-45a5-810e-14d20d59fc70" class="numbered-list" start="2"><li>Convert upper case into lower case → <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>U</mi><mi>C</mi><mo>−</mo><mi>A</mi><mo>+</mo><mi>a</mi></mrow><annotation encoding="application/x-tex">UC - A + a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">U</span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="mord mathnormal">A</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">a</span></span></span></span></span><span>﻿</span></span>. 
+Example : C-A+a = c (67-65+97 = 99).</li></ol></details></li></ul><ul id="186107d3-fd8c-43e1-9baa-740e89807ef1" class="toggle"><li><details open=""><summary>Code</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="03d6b95a-1d48-436d-9af9-31aac6ba2525"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>Time Complexity : O(n) and space complexity : O(1)</strong></div></figure><pre id="d6adbbd9-7fa8-40fb-ad0a-a7d079cc2fbb" class="code code-wrap"><code>#include&lt;iostream&gt;
+using namespace std;
+#include&lt;string.h&gt;
+
+void lowertIntoUpper(char arr[]){
+    int n=strlen(arr);
+    for(int i =0;i&lt;n;i++){
+        arr[i] = arr[i] -&#x27;a&#x27;+&#x27;A&#x27;;
+    }
+}
+
+void upperIntoLower(char arr[]){
+    int i=0;
+    int n=strlen(arr);
+    for(int i =0;i&lt;n;i++){
+        arr[i] = arr[i] -&#x27;A&#x27;+&#x27;a&#x27;;
+    }
+}
+int main(){
+    char arr1[100] = &quot;ishan&quot;;
+    char arr2[50] = &quot;SHUBHANSHU&quot;;
+    // converting lower case to upper case 
+    lowertIntoUpper(arr1);
+    cout &lt;&lt; arr1 &lt;&lt;endl;
+
+    // converting upper case to lower case 
+    upperIntoLower(arr2);
+    cout&lt;&lt;arr2&lt;&lt;endl;
+
+}</code></pre></details></li></ul></details></li></ul><h1 id="abee9d0e-f514-4069-b278-3063644a8f30" class="">String</h1><ul id="018641db-aa91-4f3e-83cc-e56ebcdc35a4" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow">String is a datatype </mark>where as character array is a data structure </li></ul><ul id="fe1d830d-3228-4c03-a6e7-3364c699bb4b" class="bulleted-list"><li style="list-style-type:disc">Dynamic character array like vector </li></ul><ul id="b3c24b15-da79-470b-9b55-4cd917f97ee0" class="bulleted-list"><li style="list-style-type:disc"> creating string → <code>string str;</code> </li></ul><ul id="a2c1717b-c887-4aa5-a305-5fd110846d84" class="bulleted-list"><li style="list-style-type:disc">Input of string <ul id="34f6616b-e436-43cf-b803-9724a9aca5d1" class="bulleted-list"><li style="list-style-type:circle"><code>cin &gt;&gt; str;</code> →  This cannot take spaced string as input  </li></ul><ul id="5cdb9fab-407f-4f23-bfce-ede657258c0a" class="bulleted-list"><li style="list-style-type:circle"><code>getline(cin , str);</code> → This can take spaced string as input  </li></ul></li></ul><ul id="64443769-5d86-4109-9020-4900c5b7d036" class="bulleted-list"><li style="list-style-type:disc">Output of string  → <code>cout &lt;&lt; str;</code> </li></ul><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Some Common functions of String</summary><div class="indented"><ul id="0a440486-0a12-4b4a-9ecc-ae2f973ef32f" class="toggle"><li><details open=""><summary><mark class="highlight-yellow"><code>Compare</code></mark><mark class="highlight-yellow"> →</mark> <mark class="highlight-yellow">Compare strings</mark></summary><ul id="30d4ec9f-86ce-443c-b6b6-be25f9bcfa19" class="bulleted-list"><li style="list-style-type:disc">If <code>Compare = 0</code> → both the strings are exactly same </li></ul><ul id="19bf2975-825c-422d-b55a-3c5116e19923" class="bulleted-list"><li style="list-style-type:disc">if <code>Compare != 0</code>  → both are different <ul id="5cf4bab2-c164-4329-8497-54b24d97cf10" class="bulleted-list"><li style="list-style-type:circle"><code>Compare &lt; 0</code> → First string’s first character ASCII value is less than second string’s first character and if equal then check second </li></ul><ul id="bdc9b2ef-29a5-461a-b0c9-ced166c60c25" class="bulleted-list"><li style="list-style-type:circle"><code>Compare &gt; 0</code> → First string’s first character ASCII value is greater than second string’s first character and if equal then check second </li></ul></li></ul><pre id="6faf58c9-6229-4879-8fb9-10ad74a83a96" class="code"><code>// compare 
+    string a = &quot;love&quot;;
+    string b = &quot;lover&quot;;
+
+    if(a.compare(b) == 0){
+        cout &lt;&lt; &quot;both are same&quot; &lt;&lt; endl;
+    }
+    else{
+        cout &lt;&lt; &quot;both not same are same&quot; &lt;&lt; endl;
+    }</code></pre></details></li></ul><ul id="bd91265b-3ca7-43ce-a8a8-79f99f966560" class="toggle"><li><details open=""><summary><mark class="highlight-yellow"><code>substr</code></mark><mark class="highlight-yellow"> → Generate substring</mark></summary><ul id="9afa79eb-a478-4996-a075-54b3bf7d1baf" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow"> </mark>syntax → <code>str.substr(index,length)</code>  </li></ul><ul id="ff697c2b-c385-434c-9489-0de29b006a9c" class="toggle"><li><details open=""><summary>Example </summary><pre id="c39f3e05-2be1-483f-b16c-cff24f52cedf" class="code"><code>// substr 
+cout &lt;&lt; str.substr(0,3)&lt;&lt;endl;</code></pre></details></li></ul></details></li></ul><ul id="0394ee1a-8ba3-4c62-af93-9a61158e50a9" class="toggle"><li><details open=""><summary><mark class="highlight-yellow"><code>find</code></mark><mark class="highlight-yellow"> →</mark> <mark class="highlight-yellow">Find content in string</mark></summary><ul id="f4fb219a-0270-4a7f-aab9-808643056c10" class="bulleted-list"><li style="list-style-type:disc">It return the index of the value which you are searching </li></ul><pre id="73f68a3f-f8ee-47e1-98b1-faf22ac56f8a" class="code"><code>// find 
+    string sent = &quot;hello jee kaise ho&quot;;
+    if(sent.find(&quot;every&quot;) == string :: npos){
+        cout &lt;&lt; &quot;not found&quot;;
+    }</code></pre></details></li></ul><ul id="522cabb3-36b8-410e-b967-acc05d405658" class="toggle"><li><details open=""><summary><mark class="highlight-yellow"><code>replace</code></mark><mark class="highlight-yellow"> → Replace portion of string</mark></summary><ul id="ddbd2377-e63a-46b2-b907-efd849bd847d" class="bulleted-list"><li style="list-style-type:disc">first argument denotes  konse index se start krna h</li></ul><ul id="882306ea-68ab-471c-80e7-0668b096eb3c" class="bulleted-list"><li style="list-style-type:disc">second argument denotes kaha tak replace krna h </li></ul><ul id="589b1f43-95ef-4a9a-8106-b920a9777f80" class="bulleted-list"><li style="list-style-type:disc">third argument denotes kya replace krna h </li></ul><pre id="5a912eb0-a339-408e-b113-8cfa7276d32c" class="code"><code>// replace 
+    string str1 = &quot;This is my first name&quot;;
+    string word = &quot;Ishan&quot;;
+
+    str1.replace(0,4,word);
+    cout &lt;&lt; str1 &lt;&lt; endl;</code></pre></details></li></ul><ul id="4f968ff4-1c7a-472d-a201-67ea48084021" class="toggle"><li><details open=""><summary><code>erase</code> → Erase characters from string</summary><ul id="e49d1ab6-7f90-4680-910c-71a75800e9dc" class="bulleted-list"><li style="list-style-type:disc">first argument denotes konse index se start krna h deletion</li></ul><ul id="a51a4a1d-7f15-4049-bd87-054a64984639" class="bulleted-list"><li style="list-style-type:disc">second argument denotes kitne character delete krna chahte ho </li></ul><pre id="d74a521e-e2ba-4f29-b5f9-c0078160e2fa" class="code"><code>// erase 
+    string str2 = &quot;ABCDEFGH&quot;;
+    str2.erase(0,4);
+    cout &lt;&lt; str2;</code></pre></details></li></ul><ul id="437747b6-dc41-44ff-b74b-c0136878f9fe" class="toggle"><li><details open=""><summary><code>pop_back</code><strong> →</strong> Delete last character</summary><pre id="813a1ed3-fdd3-4d45-bd6f-b1547f173aba" class="code"><code> // pop_back 
+    str.pop_back();
+    cout &lt;&lt; str&lt;&lt; endl;</code></pre></details></li></ul><ul id="fb888724-aad4-40fb-85b7-4378610388db" class="toggle"><li><details open=""><summary><code>push_back</code> → Append character to string</summary><pre id="fb317796-1c09-4000-9d27-9756a73e34ce" class="code"><code>// push_back 
+    str.push_back(&#x27;A&#x27;);
+    cout &lt;&lt; str&lt;&lt; endl;</code></pre><p id="7bf4f0a9-2f04-407c-96fe-a8ab7e1e996c" class="">
+</p></details></li></ul><ul id="b8bfb025-ffa2-4365-9c78-948cee2e89be" class="toggle"><li><details open=""><summary><code>empty</code> → Test if string is empty</summary><pre id="64a9be9f-2a4d-43f2-be68-1d534cb096cd" class="code"><code>// empty 
+    cout &lt;&lt; &quot;empty : &quot; &lt;&lt; str.empty() &lt;&lt; endl;</code></pre></details></li></ul><ul id="188dcb2c-8555-423e-b13b-15ef8417a6b9" class="toggle"><li><details open=""><summary><code>length</code> → Return length of string</summary><pre id="5817ecfc-53b3-44fe-9841-e4a0d2912175" class="code"><code>// Length 
+cout &lt;&lt; &quot;length : &quot; &lt;&lt; str.length() &lt;&lt; endl;</code></pre></details></li></ul><ul id="b9a2b506-3349-472c-adab-58487aba71ea" class="toggle"><li><details open=""><summary><code>s.c_str ()</code> → Returns the character of the string</summary></details></li></ul><p id="d6c8a83c-8d0f-48ff-8a84-e08c65fb5402" class="">
+</p></div></details><hr id="54deb689-9d7d-4a9e-967a-37702656784c"/><h1 id="08d4b0ef-4f26-4f18-b04a-bb900858b1c4" class="">Homework </h1><ul id="49a5fe9a-7820-45eb-8571-8d5bbf152d06" class="toggle"><li><details open=""><summary>Difference between char array and string </summary><figure id="9c7b83e7-1517-4702-ab32-5567f9b64d50" class="image"><a href="Ch-5(L-1)%20Char%20Array%20I%2038d80227658d4617950b4d113b1f9ad4/Untitled%205.jpeg"><img style="width:1600px" src="Ch-5(L-1)%20Char%20Array%20I%2038d80227658d4617950b4d113b1f9ad4/Untitled%205.jpeg"/></a></figure></details></li></ul><p id="27e9bf9a-d116-48d2-9d28-3a1446dfe07d" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
